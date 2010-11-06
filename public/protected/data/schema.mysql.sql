@@ -1,28 +1,50 @@
-CREATE TABLE tbl_user (
-    id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(128) NOT NULL,
-    password VARCHAR(128) NOT NULL,
-    email VARCHAR(128) NOT NULL
-);
+use daxiniu;
 
-INSERT INTO tbl_user (username, password, email) VALUES ('test1', 'pass1', 'test1@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test2', 'pass2', 'test2@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test3', 'pass3', 'test3@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test4', 'pass4', 'test4@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test5', 'pass5', 'test5@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test6', 'pass6', 'test6@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test7', 'pass7', 'test7@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test8', 'pass8', 'test8@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test9', 'pass9', 'test9@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test10', 'pass10', 'test10@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test11', 'pass11', 'test11@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test12', 'pass12', 'test12@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test13', 'pass13', 'test13@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test14', 'pass14', 'test14@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test15', 'pass15', 'test15@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test16', 'pass16', 'test16@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test17', 'pass17', 'test17@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test18', 'pass18', 'test18example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test19', 'pass19', 'test19example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test20', 'pass20', 'test20@example.com');
-INSERT INTO tbl_user (username, password, email) VALUES ('test21', 'pass21', 'test21@example.com');
+CREATE TABLE IF NOT EXISTS user (
+  username varchar(32) NOT NULL primary key,
+  password varchar(32) NOT NULL,
+  email varchar(256) not null default '0',
+  user_type int(3) default 0,
+  status int(3) default 0,
+  avatar varchar(256) not null default '',
+  reg_time TIMESTAMP NOT NULL DEFAULT NOW(),
+  last_time TIMESTAMP NOT NULL,
+  admin_id varchar(32) NOT NULL default '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=utf8_bin;CREATE TABLE IF NOT EXISTS admin (
+  username varchar(32) NOT NULL primary key,
+  password varchar(32) NOT NULL,
+  role int(3) default 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=utf8_bin;
+
+CREATE TABLE IF NOT EXISTS post (
+  uuid varchar(32) NOT NULL primary key,
+  title varchar(256) NOT NULL,
+  cate_id int,
+  pub_time TIMESTAMP default NOW(),
+  pre_content text default '',
+  content text default '',
+  user_id varchar(32) not null,
+  status int default 0,
+  read_count int default 0,
+  operation_id varchar(32) NOT NULL,
+  reference varchar(512),
+  source varchar(128),
+  operation_desc varchar(256),
+  flag varchar(32) default '0,'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=utf8_bin;
+
+CREATE TABLE IF NOT EXISTS attachment (
+  id int auto_increment NOT NULL  primary key,
+  url varchar(256) NOT NULL ,
+  uuid varchar(32) NOT NULL ,
+  file_size int not null default 0,
+  use_type int(3) default 0,
+  status int(3) default 0,
+  file_type varchar(32) not null
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=utf8_bin;CREATE TABLE IF NOT EXISTS category (
+  id int auto_increment NOT NULL primary key,
+  name varchar(64) NOT NULL ,
+  short_name varchar(32) NOT NULL ,
+  parent_id int not null default -1,
+  sort int(3) default 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  COLLATE=utf8_bin;
