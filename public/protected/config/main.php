@@ -8,6 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'大犀牛经验分享系统',
+	'language'=>'zh_cn',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
