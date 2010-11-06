@@ -6,5 +6,3 @@ mkdir public/assets
 chmod -R 777 public/protected/runtime
 chmod -R 777 public/protected/data
 chmod -R 777 public/assets
-
-###
